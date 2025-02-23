@@ -1,52 +1,64 @@
 "use client"
 
 import { Layout } from "antd";
-import { ThemeToggle } from "@/app/components/ThemeToggle";
+import HeaderContent from "./components/header/index";
+import { CSSProperties } from "react";
+
 const { Header, Content, Sider, Footer } = Layout;
-const headerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  height: 64,
-  paddingInline: 48,
-  lineHeight: '64px',
-  backgroundColor: '#4096ff',
-};
 
-const contentStyle: React.CSSProperties = {
-  textAlign: 'center',
-  minHeight: 120,
-  lineHeight: '120px',
-  color: '#fff',
-  backgroundColor: '#0958d9',
-};
-
-const siderStyle: React.CSSProperties = {
-  textAlign: 'center',
-  lineHeight: '120px',
-  color: '#fff',
-  backgroundColor: '#1677ff',
-};
-
-const footerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  backgroundColor: '#4096ff',
-};
-
-const layoutStyle = {
-  borderRadius: 8,
+const layoutStyle: CSSProperties = {
+  height: '100vh',
+  width: '100%',
+  maxWidth: '1920px',
+  margin: '0 auto',
+  display: 'flex',
+  flexDirection: 'column',
   overflow: 'hidden',
-  width: 'calc(50% - 8px)',
-  maxWidth: 'calc(50% - 8px)',
+  position: 'relative',
 };
-export default function Home() {
 
+const headerStyle: CSSProperties = {
+  textAlign: 'center',
+  height: '64px',
+  lineHeight: '64px',
+  position: 'sticky',
+  top: 0,
+  zIndex: 1,
+  padding: 0,
+  width: '100%',
+};
+
+const contentStyle: CSSProperties = {
+  textAlign: 'center',
+  flex: 1,
+  overflow: 'auto',
+};
+
+const siderStyle: CSSProperties = {
+  textAlign: 'center',
+  overflow: 'auto',
+};
+
+const footerStyle: CSSProperties = {
+  textAlign: 'center',
+  position: 'sticky',
+  bottom: 0,
+  width: '100%',
+  height: '24px',
+};
+
+export default function Home() {
   return (
     <Layout style={layoutStyle}>
-      <Header style={headerStyle}>Header</Header>
-      <Layout>
-        <Content style={contentStyle}>Content</Content>
-        <Sider width="25%" style={siderStyle}>
+      <Header style={headerStyle}><HeaderContent /></Header>
+      <Layout style={{ flex: 1, overflow: 'hidden' }}>
+        <Content style={{ ...contentStyle, flex: 1 }}>Content</Content>
+        <Sider
+          width="20%"
+          style={siderStyle}
+          breakpoint="lg"
+          collapsedWidth={0}
+        >
           Sider
         </Sider>
       </Layout>

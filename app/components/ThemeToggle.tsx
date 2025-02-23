@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from 'antd'
-import { useThemeStore } from '../store/useThemeStore'
+import { useThemeStore } from '../../store/useThemeStore'
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useThemeStore()

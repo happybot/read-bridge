@@ -1,11 +1,11 @@
 'use client';
 
 import { ConfigProvider, theme } from 'antd';
-import { useThemeStore } from './store/useThemeStore';
+import { useThemeStore } from '../store/useThemeStore';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { theme: currentTheme } = useThemeStore();
-
+  console.log(currentTheme, 'currentTheme')
   return (
     <ConfigProvider
       theme={{
