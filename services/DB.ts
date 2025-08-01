@@ -81,14 +81,43 @@ class BookDB extends Dexie {
 
   /**
    * 获取所有书籍预览
-   * @returns 所有书籍预览liveQuery
+   * @returns 所有书籍预览
    */
   async getAllBooksPreview(): Promise<BookPreview[]> {
-    const books = await this.getAllBooks()
-    return new Promise((resolve) => {
-      resolve(getBookPreview(books))
-    })
+    try {
+      // 直接查询需要的字段，减少数据传输
+      const books = await this.books
+        .toArray()
+        .then(books => books.map(book => ({
+          id: book.id,
+          title: book.title,
+          author: book.author,
+          cover: book.metadata.cover,
+          createTime: book.createTime
+        })));
 
+      // 获取阅读进度信息
+      const bookIds = books.map(book => book.id);
+      const readingProgressList = await this.readingProgress
+        .where('bookId')
+        .anyOf(bookIds)
+        .toArray();
+
+      const lastReadTimeMap = new Map<string, number>();
+      readingProgressList.forEach(progress => {
+        lastReadTimeMap.set(progress.bookId, progress.lastReadTime);
+      });
+
+      // 按最后阅读时间排序
+      return books.sort((a, b) => {
+        const timeA = lastReadTimeMap.get(a.id) ?? a.createTime ?? 0;
+        const timeB = lastReadTimeMap.get(b.id) ?? b.createTime ?? 0;
+        return timeB - timeA;
+      });
+    } catch (error) {
+      console.error('获取书籍预览失败:', error);
+      return [];
+    }
   }
 
   /**

@@ -2,13 +2,23 @@
 
 import { Row, Col, Button } from 'antd';
 import { BookPreview, Resource } from '@/types/book';
-import BookUploader from '@/app/components/BookUploader';
+import dynamic from 'next/dynamic';
 import { useStyleStore } from '@/store/useStyleStore';
 import { useRouter } from 'next/navigation';
 import { useSiderStore } from '@/store/useSiderStore';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { useState } from 'react';
-import BookDetailsModal from '@/app/components/BookDetailsModal';
+
+// 懒加载重量级组件
+const BookUploader = dynamic(
+  () => import('@/app/components/BookUploader'),
+  { loading: () => <div className="aspect-[3/4] w-full bg-gray-100 rounded-lg flex items-center justify-center">上传中...</div> }
+);
+
+const BookDetailsModal = dynamic(
+  () => import('@/app/components/BookDetailsModal'),
+  { loading: () => null }
+);
 
 interface BookGridProps {
   books: BookPreview[];
@@ -83,11 +93,17 @@ function handleBase64(base64: string) {
 }
 
 const BookCover = ({ cover, title }: { cover: Resource | undefined, title: string }) => {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false);
+  
   const imageCSS = `
     w-full
     h-full
     rounded-lg
+    transition-opacity duration-300
+    ${imgLoaded ? 'opacity-100' : 'opacity-0'}
   `
+  
   const noCoverCSS = `
     w-full
     h-full
@@ -100,10 +116,25 @@ const BookCover = ({ cover, title }: { cover: Resource | undefined, title: strin
     bg-[var(--ant-color-bg-elevated)]
     dark:bg-[var(--ant-color-bg-elevated)]
   `
+  
   return (
-    cover ? (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img className={imageCSS} src={handleBase64(cover.data)} alt={title} />
+    cover && !imgError ? (
+      <div className="relative w-full h-full">
+        <img 
+          className={imageCSS}
+          src={handleBase64(cover.data)} 
+          alt={title}
+          onLoad={() => setImgLoaded(true)}
+          onError={() => setImgError(true)}
+          loading="lazy"
+          decoding="async"
+        />
+        {!imgLoaded && (
+          <div className="absolute inset-0 bg-gray-200 rounded-lg flex items-center justify-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+          </div>
+        )}
+      </div>
     ) : (
       <div className={noCoverCSS}>
         No Cover

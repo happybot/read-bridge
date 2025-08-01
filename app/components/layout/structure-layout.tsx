@@ -1,15 +1,33 @@
 "use client"
 
 import { Layout } from "antd";
-import HeaderContent from "@/app/components/header";
-import FooterContent from "@/app/components/footer";
-import Sider from "@/app/components/sider";
+import dynamic from "next/dynamic";
 import { CSSProperties } from "react";
 import { useHeaderStore } from "@/store/useHeaderStore";
 import { Button } from "antd";
 import { CaretDownFilled } from "@ant-design/icons";
 import { theme } from "antd";
-import Preload from "@/app/components/preload";
+
+// 懒加载组件，减少首屏加载时间
+const HeaderContent = dynamic(
+  () => import("@/app/components/header"),
+  { loading: () => null }
+);
+
+const FooterContent = dynamic(
+  () => import("@/app/components/footer"),
+  { loading: () => null }
+);
+
+const Sider = dynamic(
+  () => import("@/app/components/sider"),
+  { loading: () => null }
+);
+
+const Preload = dynamic(
+  () => import("@/app/components/preload"),
+  { loading: () => null }
+);
 
 const { Header, Content, Footer } = Layout;
 
