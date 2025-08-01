@@ -11,6 +11,7 @@ import BookAddOrEditModal from '../BookAddOrEditModal';
 import { useReadingProgressStore } from '@/store/useReadingProgress';
 import { useBook } from '@/hooks/useBook';
 import { useSiderStore } from '@/store/useSiderStore';
+import Image from 'next/image';
 
 const { Title, Text } = Typography;
 
@@ -95,7 +96,7 @@ const BookDetailsModal: FC<BookDetailsModalProps> = ({
     return {
       ...book,
     };
-  }, [book]);
+  }, [book, t]);
 
   const handleEditSubmit = useCallback(async (updatedBook: Book) => {
     const currentBook = getBookForEdit();
@@ -125,17 +126,21 @@ const BookDetailsModal: FC<BookDetailsModalProps> = ({
       await updateBook()
       onClose();
     }
-  }, [bookId, router, t, getBookForEdit]);
+  }, [bookId, router, t, getBookForEdit, onClose, updateBook, updateReadingProgress]);
 
   const renderDetailedView = () => (
     <div className="space-y-4">
       <div className="flex gap-4">
         {book?.metadata?.cover && (
           <div className="w-1/4 aspect-[3/4] overflow-hidden rounded-lg">
-            <img
+            <Image
               src={handleBase64(book.metadata.cover)}
               alt={book?.title || t('bookDetails.unknownTitle')}
+              width={0}
+              height={0}
               className="w-full h-full object-cover"
+              style={{ width: '100%', height: '100%' }}
+              unoptimized
             />
           </div>
         )}

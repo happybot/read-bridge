@@ -12,7 +12,8 @@ const nextConfig = {
       skipDefaultConversion: true,
     },
   },
-  output: 'export', // 输出纯静态
+  // 开发环境暂时禁用静态导出，避免模块加载问题
+  output: isProd ? 'export' : undefined,
   images: {
     unoptimized: true,
   },

@@ -28,20 +28,17 @@ export default function CurrentSentence({ sentence, handleWord, onEditComplete, 
   // 书签状态管理
   const { getBookmarksByBookId } = useBookmarkStore();
 
-  // 获取当前书籍的书签数组
-  const currentBookmarks = currentBookmarkInfo ?
-    getBookmarksByBookId(currentBookmarkInfo.bookId) : [];
-
   // 计算当前是否已收藏 - 监听书签数组长度变化
   const isBookmarked = useMemo(() => {
     if (!currentBookmarkInfo) return false;
 
-    const { chapterIndex, lineIndex } = currentBookmarkInfo;
+    const { chapterIndex, lineIndex, bookId } = currentBookmarkInfo;
+    const currentBookmarks = getBookmarksByBookId(bookId);
     return currentBookmarks.some(bookmark =>
       bookmark.chapterIndex === chapterIndex &&
       bookmark.lineIndex === lineIndex
     );
-  }, [currentBookmarkInfo, currentBookmarks.length]);
+  }, [currentBookmarkInfo, getBookmarksByBookId]);
 
   const wordTypeColors = useMemo(() => ({
     'Verb': 'text-[var(--ant-green-6)]',

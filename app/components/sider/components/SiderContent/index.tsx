@@ -123,14 +123,13 @@ export default function SiderContent() {
   }, [wordOptions, selectedWordId])
 
   const { parseModel } = useLLMStore()
-  const { getSpeak, ttsGlobalConfig, ttsConfig } = useTTSStore()
+  const { getSpeak, ttsGlobalConfig } = useTTSStore()
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const speak = useMemo(() => {
     if (ttsGlobalConfig.autoSentenceTTS || ttsGlobalConfig.autoWordTTS) {
       return getSpeak()
     } else return null
-  }, [getSpeak, ttsGlobalConfig.autoSentenceTTS, ttsGlobalConfig.autoWordTTS, ttsConfig])
+  }, [getSpeak, ttsGlobalConfig.autoSentenceTTS, ttsGlobalConfig.autoWordTTS])
   const controllerRef = useRef<AbortController | null>(null);
   const defaultLLMClient = useMemo(() => {
     return parseModel
@@ -212,7 +211,7 @@ export default function SiderContent() {
 
     // 执行添加处理器的函数
     addProcessorsWithDelay()
-  }, [defaultLLMClient, sentenceOptions, setSentenceProcessingList, batchProcessingSize, t])
+  }, [defaultLLMClient, sentenceOptions, setSentenceProcessingList, t, speak, theme, ttsGlobalConfig.autoSentenceTTS])
 
   // 处理行索引
   const handleLineIndex = useCallback(async (readingProgress: ReadingProgress) => {
@@ -256,7 +255,7 @@ export default function SiderContent() {
     });
 
     processingSentences(text, bookId)
-  }, [defaultLLMClient, sentenceOptions, setSentenceProcessingList, batchProcessingSize, t, processingSentences])
+  }, [processingSentences, batchProcessingSize])
 
   // 书签操作函数
   const handleBookmarkToggle = useCallback(() => {
@@ -346,7 +345,7 @@ export default function SiderContent() {
       if (!chunk) continue
       setWordDetails((prev) => (prev || "") + chunk)
     }
-  }, [defaultLLMClient, handleTabChange, sentence, isSameWord, wordOption])
+  }, [defaultLLMClient, handleTabChange, sentence, isSameWord, wordOption, speak, ttsGlobalConfig.autoWordTTS])
 
 
   const handleEditComplete = useCallback((text: string) => {

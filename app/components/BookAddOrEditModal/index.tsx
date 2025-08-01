@@ -6,6 +6,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
 import { COMMON_LANGUAGES } from "@/constants/book";
 import ChapterManager from "./cpns/ChapterManager";
+import Image from 'next/image';
 
 const { Option } = Select;
 
@@ -99,9 +100,13 @@ export default function BookAddOrEditModal({ open, onCancel, onOk, getInitialDat
             {book?.metadata.cover ? (
               <div className="relative mb-4 w-full">
                 <div className="max-w-full overflow-hidden rounded-lg shadow-md mx-auto" style={{ maxHeight: '330px' }}>
-                  <img
+                  <Image
                     src={`data:${book.metadata.cover.mediaType};base64,${book.metadata.cover.data}`}
                     alt={t('book.coverAlt')}
+                    width={0}
+                    height={0}
+                    style={{ width: '100%', height: 'auto' }}
+                    unoptimized
                     className="w-full h-auto object-contain"
                   />
                 </div>
