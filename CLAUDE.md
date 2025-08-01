@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-ReadBridge is an AI-powered reading assistant for language learning, built with Next.js (frontend) and Tauri (desktop app). It implements the "n+1" comprehensible input approach, helping learners engage with content in their target language through AI-assisted reading.
+ReadBridge is an AI-powered reading assistant for language learning, built with Next.js (web application). It implements the "n+1" comprehensible input approach, helping learners engage with content in their target language through AI-assisted reading.
 
 ## Development Commands
 
@@ -23,12 +23,6 @@ npm run start        # Start production server
 npm run lint         # Run ESLint
 ```
 
-### Desktop Development (Tauri)
-```bash
-# Prerequisites: Install Tauri v2 dependencies
-npm run tauri dev    # Start Tauri development mode
-npm run tauri build  # Build desktop application
-```
 
 ### Testing
 ```bash
@@ -40,7 +34,6 @@ npm run lint         # Code linting with ESLint
 
 ### Core Technology Stack
 - **Frontend**: Next.js 14.2.24 with React 18, TypeScript
-- **Desktop**: Tauri 2.5.0 with Rust backend
 - **UI Framework**: Ant Design 5.24.0 with Tailwind CSS
 - **State Management**: Zustand 5.0.3 with persistence
 - **Database**: Dexie (IndexedDB wrapper) for web storage
@@ -137,7 +130,6 @@ interface Provider {
 - **No Server Storage**: Keys never transmitted to application servers
 
 #### CSP Configuration
-- Tauri app configured with `csp: null` for development flexibility
 - Production deployments should implement appropriate CSP headers
 
 ### Internationalization
@@ -153,11 +145,6 @@ interface Provider {
 - **Static Export**: Configurable for static hosting platforms
 - **Platform Support**: Vercel, Cloudflare Pages, etc.
 - **Environment Variables**: Runtime configuration for AI providers
-
-#### Desktop Build
-- **Cross-Platform**: Windows, macOS, Linux support
-- **Release Automation**: GitHub Actions for multi-platform builds
-- **Bundle Configuration**: Custom installers for each platform
 
 ### Development Notes
 
@@ -190,4 +177,3 @@ interface Provider {
 - `typescript`: 5 - Type checking
 - `tailwindcss`: 3.4.1 - Utility-first CSS
 - `eslint`: 8 - Code linting
-- `@tauri-apps/cli`: 2.5.0 - Desktop app building

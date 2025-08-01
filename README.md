@@ -2,11 +2,11 @@
 
 *[English](./README.md) | [中文](./README.zh-CN.md)*
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)](https://nextjs.org/) [![Tauri](https://img.shields.io/badge/Tauri-24C8D8?logo=tauri&logoColor=white)](https://tauri.app/) [![Web](https://img.shields.io/badge/Platform-Web-blue)](https://nextjs.org/) [![Windows](https://img.shields.io/badge/Platform-Windows-blue?logo=windows&logoColor=white)](https://tauri.app/) [![macOS](https://img.shields.io/badge/Platform-macOS-blue?logo=apple&logoColor=white)](https://tauri.app/) [![Linux](https://img.shields.io/badge/Platform-Linux-blue?logo=linux&logoColor=white)](https://tauri.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)](https://nextjs.org/) [![Web](https://img.shields.io/badge/Platform-Web-blue)](https://nextjs.org/)
 
 [![Documentation](https://img.shields.io/badge/Documentation-docs.readbridge.cc-blue)](https://docs.readbridge.cc/)
 
-ReadBridge is an AI-powered reading assistant available as both a web application and desktop software (via Tauri). It enhances language learning through the "n+1" comprehensible input approach, helping learners engage with content in their target language.
+ReadBridge is an AI-powered reading assistant available as a web application. It enhances language learning through the "n+1" comprehensible input approach, helping learners engage with content in their target language.
 
 ## Overview
 
@@ -42,7 +42,7 @@ The video also introduced the story of Hungarian linguist Lomb Kato, who mastere
 - **Contextual Learning**: Explore vocabulary and grammar structures in authentic contexts
 - **Progress Tracking**: Save your reading position across chapters and books
 - **Customizable Configuration**: Adjust settings to match your learning preferences
-- **Cross-Platform**: Use in any modern browser or as a desktop application
+- **Cross-Platform**: Use in any modern browser
 - **Book Management**: Easily import, organize, and access your reading materials
 - **Distraction-Free Design**: Clean interface designed for focused reading
 
@@ -68,14 +68,6 @@ The video also introduced the story of Hungarian linguist Lomb Kato, who mastere
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-### Desktop Version (Tauri)
-
-1. Follow the [Tauri v2 setup guide](https://v2.tauri.app/guides/quick-start/prerequisites) to install prerequisites
-   
-2. Install dependencies and build the application
-```bash
-   npm run tauri dev
-```
 
 ## Downloads
 

@@ -2,11 +2,11 @@
 
 *[English](./README.md) | [中文](./README.zh-CN.md)*
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)](https://nextjs.org/) [![Tauri](https://img.shields.io/badge/Tauri-24C8D8?logo=tauri&logoColor=white)](https://tauri.app/) [![Web](https://img.shields.io/badge/-Web-blue)](https://nextjs.org/) [![Windows](https://img.shields.io/badge/平台-Windows-blue?logo=windows&logoColor=white)](https://tauri.app/) [![macOS](https://img.shields.io/badge/平台-macOS-blue?logo=apple&logoColor=white)](https://tauri.app/) [![Linux](https://img.shields.io/badge/平台-Linux-blue?logo=linux&logoColor=white)](https://tauri.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)](https://nextjs.org/) [![Web](https://img.shields.io/badge/-Web-blue)](https://nextjs.org/)
 
 [![文档](https://img.shields.io/badge/文档-docs.readbridge.cc-blue)](https://docs.readbridge.cc/)
 
-ReadBridge是一款AI驱动的阅读助手，同时提供网页应用和桌面软件（通过Tauri）。它通过"n+1"可理解输入方法辅助语言学习，帮助学习者更有效地阅读目标语言内容。
+ReadBridge是一款AI驱动的阅读助手，提供网页应用。它通过"n+1"可理解输入方法辅助语言学习，帮助学习者更有效地阅读目标语言内容。
 
 ## 概述
 
@@ -42,7 +42,7 @@ ReadBridge的灵感来自我在一次刷视频时的偶然发现，这个视频�
 - **上下文学习**：在真实语境中探索词汇和语法结构
 - **进度跟踪**：保存各章节和书籍中的阅读位置
 - **自定义配置**：调整设置以匹配你的学习偏好
-- **跨平台**：在任何现代浏览器或作为桌面应用使用
+- **跨平台**：在任何现代浏览器中使用
 - **书籍管理**：轻松导入、组织和访问阅读材料
 - **无干扰设计**：简洁界面设计，专注于阅读体验
 
@@ -68,14 +68,6 @@ ReadBridge的灵感来自我在一次刷视频时的偶然发现，这个视频�
 
 4. 在浏览器中打开 [http://localhost:3000](http://localhost:3000)
 
-### 桌面版 (Tauri)
-
-1. 按照 [Tauri v2 设置指南](https://v2.tauri.app/guides/quick-start/prerequisites) 安装先决条件
-   
-2. 安装依赖并构建应用
-```bash
-   npm run tauri dev
-```
 
 ## 下载
 
