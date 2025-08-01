@@ -169,8 +169,10 @@ export default function SiderContent() {
     setSentenceProcessingList([])
 
     const addProcessorsWithDelay = async () => {
-      for (let i = 0; i < sentenceOptions.length; i++) {
-        const option = sentenceOptions[i]
+      // 只处理启用的配置项
+      const enabledOptions = sentenceOptions.filter(option => option.enabled)
+      for (let i = 0; i < enabledOptions.length; i++) {
+        const option = enabledOptions[i]
         const { name, type, id } = option
 
         try {
@@ -199,7 +201,7 @@ export default function SiderContent() {
           console.log(t('common.templates.analysisFailed', { entity: t('common.entities.sentenceAnalysisGeneric') }), error, name, type, text)
         }
 
-        if (i < sentenceOptions.length - 1) {
+        if (i < enabledOptions.length - 1) {
           await new Promise(resolve => setTimeout(resolve, 50))
         }
       }

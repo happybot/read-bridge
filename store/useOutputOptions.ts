@@ -12,35 +12,35 @@ function defaultSentenceOutputOption(): OutputOption[] {
       name: 'Sentence Analysis',
       type: OUTPUT_TYPE.SIMPLE_LIST,
       rulePrompt: INPUT_PROMPT.SENTENCE_STRUCTURE_ANALYSIS,
-      enabled: true,
+      enabled: false,
     },
     {
       id: generateUUID(),
       name: 'Sentence Rewrite',
       type: OUTPUT_TYPE.TEXT,
       rulePrompt: INPUT_PROMPT.SENTENCE_REWRITE,
-      enabled: true,
+      enabled: false,
     },
     {
       id: generateUUID(),
       name: 'Key Word Analysis',
       type: OUTPUT_TYPE.KEY_VALUE_LIST,
       rulePrompt: INPUT_PROMPT.EXTRACT_KEY_WORDS,
-      enabled: true,
+      enabled: false,
     },
     {
       id: generateUUID(),
       name: 'Sentence Analysis',
       type: OUTPUT_TYPE.MD,
       rulePrompt: INPUT_PROMPT.MD_SENTENCE_ANALYZING,
-      enabled: true,
+      enabled: false,
     },
     {
       id: generateUUID(),
       name: 'Sentence Simplification',
       type: OUTPUT_TYPE.MD,
       rulePrompt: INPUT_PROMPT.MD_SENTENCE_SIMPLIFICATION,
-      enabled: true,
+      enabled: false,
     }
   ]
 }
