@@ -46,6 +46,7 @@ export type OutputOption = {
   name: string
   type: OutputType
   rulePrompt: string
+  enabled: boolean
 }
 
 export type WordOption = {

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Card } from "../index";
-import { Button, Modal, Form, Input, Select, Popconfirm, List, Typography, Space, Tooltip } from "antd";
+import { Button, Modal, Form, Input, Select, Popconfirm, List, Typography, Space, Tooltip, Switch } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons";
 import { useOutputOptions } from "@/store/useOutputOptions";
 import { OutputOption } from "@/types/llm";
@@ -11,7 +11,7 @@ import { BATCH_PROCESSING_SIZE_OPTIONS } from "@/constants/output";
 
 export default function SentenceProcessingSection() {
   const { t } = useTranslation()
-  const { sentenceOptions, addSentenceOptions, updateSentenceOptions, deleteSentenceOptions, resetSentenceOptions, batchProcessingSize, setBatchProcessingSize } = useOutputOptions();
+  const { sentenceOptions, addSentenceOptions, updateSentenceOptions, deleteSentenceOptions, toggleSentenceOption, resetSentenceOptions, batchProcessingSize, setBatchProcessingSize } = useOutputOptions();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [currentOption, setCurrentOption] = useState<OutputOption | null>(null);
@@ -74,6 +74,11 @@ export default function SentenceProcessingSection() {
             <List.Item
               key={item.id}
               actions={[
+                <Switch
+                  checked={item.enabled}
+                  onChange={() => toggleSentenceOption(item.id)}
+                  key="toggle"
+                />,
                 <Button
                   type="text"
                   icon={<EditOutlined />}
@@ -97,11 +102,19 @@ export default function SentenceProcessingSection() {
               ]}
             >
               <List.Item.Meta
-                title={item.name}
+                title={
+                  <span style={{ opacity: item.enabled ? 1 : 0.5 }}>
+                    {item.name}
+                  </span>
+                }
                 description={
                   <Space direction="vertical" size="small" style={{ width: '100%' }}>
-                    <Typography.Text type="secondary">{t('settings.sentenceType')}: {typeMap[item.type as keyof typeof typeMap] || item.type}</Typography.Text>
-                    <Typography.Paragraph ellipsis={{ rows: 2 }}>{item.rulePrompt}</Typography.Paragraph>
+                    <Typography.Text type="secondary" style={{ opacity: item.enabled ? 1 : 0.5 }}>
+                      {t('settings.sentenceType')}: {typeMap[item.type as keyof typeof typeMap] || item.type}
+                    </Typography.Text>
+                    <Typography.Paragraph ellipsis={{ rows: 2 }} style={{ opacity: item.enabled ? 1 : 0.5 }}>
+                      {item.rulePrompt}
+                    </Typography.Paragraph>
                   </Space>
                 }
               />

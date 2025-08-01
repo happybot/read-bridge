@@ -12,30 +12,35 @@ function defaultSentenceOutputOption(): OutputOption[] {
       name: 'Sentence Analysis',
       type: OUTPUT_TYPE.SIMPLE_LIST,
       rulePrompt: INPUT_PROMPT.SENTENCE_STRUCTURE_ANALYSIS,
+      enabled: true,
     },
     {
       id: generateUUID(),
       name: 'Sentence Rewrite',
       type: OUTPUT_TYPE.TEXT,
       rulePrompt: INPUT_PROMPT.SENTENCE_REWRITE,
+      enabled: true,
     },
     {
       id: generateUUID(),
       name: 'Key Word Analysis',
       type: OUTPUT_TYPE.KEY_VALUE_LIST,
       rulePrompt: INPUT_PROMPT.EXTRACT_KEY_WORDS,
+      enabled: true,
     },
     {
       id: generateUUID(),
       name: 'Sentence Analysis',
       type: OUTPUT_TYPE.MD,
       rulePrompt: INPUT_PROMPT.MD_SENTENCE_ANALYZING,
+      enabled: true,
     },
     {
       id: generateUUID(),
       name: 'Sentence Simplification',
       type: OUTPUT_TYPE.MD,
       rulePrompt: INPUT_PROMPT.MD_SENTENCE_SIMPLIFICATION,
+      enabled: true,
     }
   ]
 }
@@ -60,6 +65,7 @@ interface OutputOptionsStore {
   addSentenceOptions: (newOption: OutputOption) => void
   deleteSentenceOptions: (targetOption: OutputOption) => void
   updateSentenceOptions: (updatedOption: OutputOption) => void
+  toggleSentenceOption: (id: string) => void
   resetSentenceOptions: () => void
   batchProcessingSize: number
   setBatchProcessingSize: (size: number) => void
@@ -98,7 +104,8 @@ export const useOutputOptions = create<OutputOptionsStore>()(
       addSentenceOptions: (newOption) => set((state) => ({
         sentenceOptions: [...state.sentenceOptions, {
           ...newOption,
-          id: generateUUID()
+          id: generateUUID(),
+          enabled: newOption.enabled ?? true
         }]
       })),
       deleteSentenceOptions: (targetOption) => set((state) => ({
@@ -107,6 +114,10 @@ export const useOutputOptions = create<OutputOptionsStore>()(
       updateSentenceOptions: (updatedOption) => set((state) => ({
         sentenceOptions: state.sentenceOptions.map((option) =>
           option.id === updatedOption.id ? updatedOption : option)
+      })),
+      toggleSentenceOption: (id) => set((state) => ({
+        sentenceOptions: state.sentenceOptions.map((option) =>
+          option.id === id ? { ...option, enabled: !option.enabled } : option)
       })),
       resetSentenceOptions: () => set(() => ({
         sentenceOptions: defaultSentenceOutputOption()
