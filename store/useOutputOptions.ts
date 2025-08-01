@@ -41,6 +41,13 @@ function defaultSentenceOutputOption(): OutputOption[] {
       type: OUTPUT_TYPE.MD,
       rulePrompt: INPUT_PROMPT.MD_SENTENCE_SIMPLIFICATION,
       enabled: false,
+    },
+    {
+      id: generateUUID(),
+      name: 'Grammar Analysis',
+      type: OUTPUT_TYPE.MD,
+      rulePrompt: INPUT_PROMPT.SENTENCE_GRAMMAR_PROMPT,
+      enabled: false,
     }
   ]
 }
