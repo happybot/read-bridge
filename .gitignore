@@ -37,3 +37,6 @@ next-env.d.ts
 
 key.json
 /doc
+
+# specstory
+.specstory
